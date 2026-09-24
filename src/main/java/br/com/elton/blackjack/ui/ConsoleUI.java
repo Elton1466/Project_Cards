@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Interface de console (CLI) adaptada para modo Multiplayer (2 Jogadores vs Dealer).
+ * Interface de console (CLI) adaptada para modo Multiplayer com renderização ASCII Art das cartas.
  */
 public class ConsoleUI {
 
@@ -49,7 +49,7 @@ public class ConsoleUI {
 
     public double solicitarValorAposta(Humano jogador) {
         while (true) {
-            System.out.printf("👉 %s (Saldo: R$ %.2f) - Digite o valor da aposta (ou 0 para parar de apostar): R$ ",
+            System.out.printf("👉 %s (Saldo: R$ %.2f) - Digite a aposta (ou 0 para parar): R$ ",
                     jogador.getNome(), jogador.getSaldoFichas());
             try {
                 String linha = scanner.nextLine().trim();
@@ -66,27 +66,35 @@ public class ConsoleUI {
     }
 
     public void exibirMesa(List<Humano> jogadores, Dealer dealer, boolean ocultarCartaDealer) {
-        System.out.println("\n------------------------------------------------------------------");
-        System.out.print(" 🎩 DEALER: ");
-        List<Carta> cartasDealer = dealer.getMao().getCartas();
-        if (ocultarCartaDealer && cartasDealer.size() >= 2) {
-            System.out.println(cartasDealer.get(0) + " [??] (Carta oculta)");
-        } else {
-            System.out.println(dealer.getMao());
-        }
+        System.out.println("\n==================================================================");
+        System.out.println("                      🎰 MESA DE JOGO 🎰                         ");
+        System.out.println("==================================================================");
 
+        // Exibe o Dealer
+        System.out.print(" 🎩 DEALER: ");
+        if (ocultarCartaDealer) {
+            System.out.println("[Primeira carta visível, 2ª oculta]");
+        } else {
+            System.out.println("Total: " + dealer.getPontuacao() + " pontos");
+        }
+        System.out.println(CartaASCIIFormatter.formatarMaoASCII(dealer.getMao().getCartas(), ocultarCartaDealer));
+        System.out.println();
+
+        // Exibe cada Jogador Humano
         for (Humano j : jogadores) {
             String statusExtra = j.isEstourou() ? " ❌ (ESTOUROU!)" : (j.isBlackjack() ? " 🌟 (BLACKJACK!)" : "");
-            System.out.println(" 👤 " + j.getNome().toUpperCase() + " (Saldo: R$ " + String.format("%.2f", j.getSaldoFichas()) + "): "
-                    + j.getMao() + statusExtra);
+            System.out.printf(" 👤 %s (Saldo: R$ %.2f | Total: %d pts)%s\n",
+                    j.getNome().toUpperCase(), j.getSaldoFichas(), j.getPontuacao(), statusExtra);
+            System.out.println(CartaASCIIFormatter.formatarMaoASCII(j.getMao().getCartas(), false));
+            System.out.println();
         }
-        System.out.println("------------------------------------------------------------------");
+        System.out.println("==================================================================");
     }
 
     public char solicitarAcaoJogador(Humano jogador) {
         while (true) {
-            System.out.printf("\nTurno de %s %s | [1] Pedir Carta (Hit) | [2] Parar (Stand) | Opção: ",
-                    jogador.getNome(), jogador.getMao());
+            System.out.printf("\nTurno de %s (Total: %d pts) | [1] Pedir Carta (Hit) | [2] Parar (Stand) | Opção: ",
+                    jogador.getNome(), jogador.getPontuacao());
             String entrada = scanner.nextLine().trim();
             if (entrada.equals("1") || entrada.equalsIgnoreCase("h")) {
                 return '1';

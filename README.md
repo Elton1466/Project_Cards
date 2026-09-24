@@ -1,6 +1,29 @@
-# 🃏 Project Cards - Jogo de Blackjack (21) Multiplayer em Java
+# 🃏 Project Cards - Jogo de Blackjack (21) Multiplayer em Java com ASCII Art
 
-Este repositório contém uma aplicação orientada a objetos desenvolvida em **Java 17+** para o clássico jogo de cartas **Blackjack (21)** com suporte ao modo **Multiplayer (2 Jogadores Humanos contra a Mesa/Dealer)**, com foco em boas práticas de Engenharia de Software, Arquitetura Limpa, Testes Unitários e Automação de Build via Maven.
+Este repositório contém uma aplicação orientada a objetos desenvolvida em **Java 17+** para o clássico jogo de cartas **Blackjack (21)** com suporte ao modo **Multiplayer (2 Jogadores Humanos vs Dealer)** e renderização visual em **ASCII Art** para desenhar as cartas diretamente no terminal.
+
+---
+
+## 🎨 Renderização em ASCII Art no Terminal
+
+As cartas são desenhadas lado a lado com molduras ASCII em tempo real:
+
+```text
+┌───────┐ ┌───────┐
+│ A     │ │ 10    │
+│   ♠   │ │   ♦   │
+│     A │ │    10 │
+└───────┘ └───────┘
+```
+
+Carta oculta do Dealer:
+```text
+┌───────┐ ┌───────┐
+│ K     │ │ ?   ? │
+│   ♥   │ │   ?   │
+│     K │ │ ?   ? │
+└───────┘ └───────┘
+```
 
 ---
 
@@ -10,8 +33,11 @@ A aplicação foi projetada seguindo os princípios de Responsabilidade Única (
 
 - **Modo Multiplayer (2 Jogadores vs Dealer)**:
   - Permite que dois jogadores humanos joguem em turnos no mesmo terminal (*hotseat/pass-and-play*), com saldos de fichas, apostas e decisões independentes contra a mesa (Dealer).
+- **Interface e Formatador Visual (`ui/`)**:
+  - `CartaASCIIFormatter`: Responsável por desenhar graficamente as bordas, símbolos dos naipes (♠, ♥, ♦, ♣) e rótulos de pontuação das cartas.
+  - `ConsoleUI`: Interface gráfica via terminal com formatação ASCII, exibição das mãos de todos os participantes e sanitização de entradas.
 - **Orientação a Objetos e Imutabilidade**:
-  - `Naipe` & `ValorCarta`: Enumeradores encapsulando os símbolos (♠, ♥, ♦, ♣) e os valores de pontuação das cartas.
+  - `Naipe` & `ValorCarta`: Enumeradores encapsulando os símbolos e os valores das cartas.
   - `Carta`: Entidade imutável que combina Naipe e Valor.
   - `Baralho`: Coleção de 52 cartas com reabastecimento automático e embaralhamento via `Collections.shuffle`.
   - `Mao`: Algoritmo inteligente que ajusta dinamicamente a pontuação do Ás (11 ou 1) para otimizar a mão do jogador sem estourar 21.
@@ -19,9 +45,6 @@ A aplicação foi projetada seguindo os princípios de Responsabilidade Única (
   - `Jogador`: Classe base abstrata para participantes do jogo.
   - `Humano`: Especialização com controle de saldo de fichas, apostas e recompensas (pagamento 3:2 no Blackjack natural).
   - `Dealer`: Inteligência da banca que segue a regra oficial do cassino (compra obrigatória se pontuação < 17).
-- **Interface e Serviços**:
-  - `JogoService`: Orquestra o ciclo de vida das rodadas multiplayer, distribuição de cartas e decisão de vencedores.
-  - `ConsoleUI`: Interface gráfica via terminal com formatação ASCII, exibição das mãos de todos os participantes e sanitização de entradas.
 
 ---
 
@@ -74,19 +97,19 @@ java -jar target/blackjack-1.0.0.jar
 
 ## 🧪 Testes Unitários
 
-A suíte de testes em `MaoTest.java` cobre cenários críticos de regra de jogo:
-- ✅ Cálculo de pontuações sem Ás.
+A suíte de testes em `MaoTest.java` e `CartaASCIIFormatterTest.java` cobre cenários críticos:
+- ✅ Desenho gráfico das bordas e símbolos em ASCII Art.
+- ✅ Renderização de carta oculta do Dealer.
 - ✅ Reajuste automático do valor do Ás de 11 para 1 ao ultrapassar 21 pontos.
 - ✅ Combinação de múltiplos Áses em uma mesma mão.
-- ✅ Detecção imediata de Blackjack Natural (21 pontos na abertura com 2 cartas).
-- ✅ Validação de estouro (*Bust*).
+- ✅ Detecção imediata de Blackjack Natural.
 
 ---
 
 ## 🤖 Nota de Transparência e Uso de IA
 
 > [!NOTE]
-> A arquitetura orientada a objetos, suporte multiplayer, implementação das classes em Java 17, suíte de testes unitários com JUnit 5, automação via Maven (`pom.xml`) e a elaboração desta documentação foram desenvolvidas com a assistência de **Inteligência Artificial (Google Antigravity AI Agent)** no processo de engenharia e refatoração de código.
+> A arquitetura orientada a objetos, suporte multiplayer, renderização em ASCII Art, implementação das classes em Java 17, suíte de testes unitários com JUnit 5, automação via Maven (`pom.xml`) e a elaboração desta documentação foram desenvolvidas com a assistência de **Inteligência Artificial (Google Antigravity AI Agent)** no processo de engenharia de software.
 
 ---
 

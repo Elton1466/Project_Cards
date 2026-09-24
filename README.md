@@ -1,4 +1,4 @@
-# 🃏 Project Cards - Jogo de Blackjack (21) Multiplayer em Java com ASCII Art
+# 🃏 Jogo Blackjack Java (`jogo-blackjack-java`)
 
 Este repositório contém uma aplicação orientada a objetos desenvolvida em **Java 17+** para o clássico jogo de cartas **Blackjack (21)** com suporte ao modo **Multiplayer (2 Jogadores Humanos vs Dealer)** e renderização visual em **ASCII Art** para desenhar as cartas diretamente no terminal.
 
@@ -90,7 +90,7 @@ make run
 ```
 ou executando o JAR gerado:
 ```bash
-java -jar target/blackjack-1.0.0.jar
+java -jar target/jogo-blackjack-java-1.0.0.jar
 ```
 
 ---

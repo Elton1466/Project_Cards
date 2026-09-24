@@ -1,5 +1,5 @@
 # ==============================================================================
-# Makefile - Project_Cards (Blackjack / Jogo de 21 em Java)
+# Makefile - jogo-blackjack-java (Blackjack / Jogo de 21 em Java)
 # Automação de compilação, testes e execução
 # ==============================================================================
 
@@ -14,7 +14,7 @@ test:
 	$(MVN) test
 
 run: build
-	java -jar target/blackjack-1.0.0.jar
+	java -jar target/jogo-blackjack-java-1.0.0.jar
 
 clean:
 	$(MVN) clean

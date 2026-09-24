@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.elton</groupId>
-    <artifactId>blackjack</artifactId>
+    <artifactId>jogo-blackjack-java</artifactId>
     <version>1.0.0</version>
-    <name>Blackjack 21 Game</name>
-    <description>Implementacao orientada a objetos do Jogo de 21 (Blackjack) em Java</description>
+    <name>Jogo Blackjack Java</name>
+    <description>Implementacao orientada a objetos do Jogo de 21 (Blackjack) Multiplayer em Java 17</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
